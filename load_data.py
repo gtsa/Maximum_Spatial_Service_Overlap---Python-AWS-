@@ -1,10 +1,20 @@
 def input_limits_validation(input_vars_list):
+    """
+    Check if all variables of list are on the range [1, 1000]
+    and raise Exception, if not
+    :param input_vars_list -> list
+    :return: None
+    """
     num_input_limits_violations = sum([i not in range(1, 1001) for i in input_vars_list])
     if num_input_limits_violations > 0:
         raise Exception('Inputs must be integers and on the range [1, 1000]')
 
 
 def load_data():
+    """
+    Load input data via console (as text) and transform them in digestible form
+    :return: list(N:int, P:list)
+    """
     _N, _M = input().split()
     N, M = int(_N), int(_M)
     input_limits_validation([N, M])
