@@ -1,0 +1,48 @@
+Here we briefly write down our thoughts on the following questions:
+(i) how we have approached the problem,
+(ii) what is the order of complexity of our approach, and if we could do better.
+
+After reading the problem statement, our first thought was that we had to do
+with some kind of inverse facility-location problem ("inverse", considering it
+from the viewpoint of the client), or better something very similar to a vertex
+1-centre or maximum 1-cover problem. This impression made us believe that we should
+probably consider a dynamic graph algorithms solution. But after a better 
+conceptual comprehension and qualitative description of the problem, we realised
+that our solution could not profit from any analogies with the above ones and
+decided that we should proceed by looking for a non-graph solution.
+
+Next step, moving towards implementing the solution, we had to decide between
+an object-oriented and a procedural with functional elements approach. In this
+respect, we preferred finally the second solution for the following reasons:
+- straightforwardness 
+- intuitiveness
+- minimal simplicity
+There's no doubt that the modelling of the problem with an object-oriented
+solution would retain much more information potentially useful for future
+problems of a Z-town-like case but it's not the case this time. In our case,
+the advantages of the minimal simplicity of a functional solution became even
+clearer when we juxtaposed the initial draft codes of the two different
+approaches (the object-oriented solution can be found in the draft/ folder).
+
+Finally (and besides having to organise our repo's structure in the most
+efficient and intuitive way) we decided to unit test our solution, thus we
+designed and executed several happy-path and failure tests. They all helped
+in the optimisation and confirmed the functionality of our solution.
+
+The order of complexity of our algorithmic solution is O(MN^2). We're looping
+through all the M pizzerias and for each one of them, we might have to scan up
+to 2xM city's blocks. That is because a given pizzeria creates around it a
+coverage area whose order (not the dimension) is KxK, where K is practically bound
+by N, thus N^2. Nevertheless, the edge case for which we have to scan  NxN-order
+matrix is when K = N/2 and X, Y = N/2, N/2. This edge case, practically very far
+from the usual case, gives the complexity order of our solution (O(MN^2)). We had
+suspected this result by the fact that our stress test execution time is very high
+(for an edge case input of N, M = 1000 and X, Y, K ∈ [1, 1000], time ≈ 9min
+with 31.1 GiB / 1.80GHz × 8) explain the result of our stress test. With the
+current approach, we need to calculate and keep in memory the whole spatial
+representation in order to reduce it down to simply a max number. We spent some
+time thinking that the complexity could be dropped down to potentially O(n^2)
+which we think could not be improved as it is a two-dimensional problem. However
+we couldn’t find a solution that would achieve that and spent time in other
+areas of my solution (as trying to design a function that tries to approximate
+computationally the complexity order (draft/order_comput_calcul.py).
