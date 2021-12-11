@@ -1,5 +1,5 @@
 
-# Maximum Spatial Service Overlap (part of the Pizza Relegalisation Road Map)
+# Maximum Spatial Service Overlap
 
 This is a Python implementation — part of the wider API project who seeks to help the mayor of Z-city, a great pizza lover — to find the city's block where he can have the greatest selection of pizzas. After the recent relegalisation of pizza production and sale and the explosive growth of new pizzerias, **the ***Maximum Spatial Service Overlap*** algorithm's goal is to calculate that maximum amount of pizzerias' service cover overlap**. 
 
