@@ -40,7 +40,6 @@ def get_pizzeria_cover_grid(city_grid_coords, pizzeria_location, service_cover):
     :return: 2d-numpy.array
     """
     distance_from_pizzeria_grid_coords = city_grid_coords - pizzeria_location
-    distance_from_pizzeria_grid_coords
     distance_from_pizzeria_grid = np.abs(distance_from_pizzeria_grid_coords).sum(1)
     covered_coords = city_grid_coords[distance_from_pizzeria_grid <= service_cover]
     city_dim = int(len(city_grid_coords)**.5)
