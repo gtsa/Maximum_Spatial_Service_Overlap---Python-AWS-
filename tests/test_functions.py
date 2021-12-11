@@ -1,9 +1,8 @@
 import numpy as np
-
+import io
 import pytest
 
 from functions import get_city_grid_coords, pythonize_coords, get_pizzeria_cover_grid, get_max_grids_overlap
-from tests.test_load_data import mock_input
 
 def test_get_city_grid_coords_use_case():
     """

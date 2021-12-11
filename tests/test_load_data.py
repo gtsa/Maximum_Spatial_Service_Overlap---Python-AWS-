@@ -1,23 +1,16 @@
 import numpy as np
 import pytest
+import io
 
 from load_data import load_data
 
-def mock_input(monkeypatch, data):
-    """
-    Helper function mocks the built-in input function
-    via monkeypatch fixture
-    :param data: subsitute for console input data
-    """
-    responses = iter(data)
-    monkeypatch.setattr('builtins.input', lambda: next(responses, '\n'))
 
 def test_load_data_use_case(monkeypatch):
     """
     Test load_data via console in a use case
-    :param monkeypatch: subsitute for console input data
+    :param monkeypatch: subsitute for standard input data
     """
-    mock_input(monkeypatch, ['5 2', '3 3 2', '1 1 2'])
+    monkeypatch.setattr('sys.stdin', io.StringIO('5 2\n3 3 2\n1 1 2\n'))
     a, b = load_data()
     assert (a, b) == (5, [[3, 3, 2], [1, 1, 2]])
 
@@ -29,13 +22,13 @@ def test_load_validation_edge_case_missing_input_arg(monkeypatch, x, y, z):
     """
     Test load_data via console in a the edge case where
     the first line input has less values than expected
-    :param monkeypatch: subsitute for console input data
+    :param monkeypatch: subsitute for standard input data
     """
     if x == '5 2' and y == '3 3 2' and z == '1 1 2':
         pass
     else:
-        inp = [x]+[y]+[z]
-        mock_input(monkeypatch, inp)
+        inp = x+"\n"+y+"\n"+z+"\n"
+        monkeypatch.setattr('sys.stdin', io.StringIO(inp))
         with pytest.raises(ValueError):
             load_data()
 
@@ -55,12 +48,14 @@ def test_load_validation_edge_case_missing_input_arg(monkeypatch, x, y, z):
                                ['5 2', '3 3 2', '1 1001 2'],
                                ['5 2', '3 3 2', '1 1 0'],
                                ['5 2', '3 3 2', '1 1 1001']])
-def test_load_validation_edge_case_missing_input_arg(monkeypatch, x):
+def test_load_validation_edge_case_input_beyond_limitations(monkeypatch, x):
     """
     Test load_data via console in a the edge case where
-    the first line input has less values than expected
-    :param monkeypatch: subsitute for console input data
+    any of the input variables is beyond the given limits,
+    i.e. M, N, X, Y, K < 0 or M, N, X, Y, K > 1000
+    :param monkeypatch: subsitute for standard input data
     """
-    mock_input(monkeypatch, x)
+    inp = "\n".join(x)+"\n"
+    monkeypatch.setattr('sys.stdin', io.StringIO(inp))
     with pytest.raises(Exception):
         load_data()
