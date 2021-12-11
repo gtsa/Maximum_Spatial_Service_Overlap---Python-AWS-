@@ -1,0 +1,18 @@
+service: max-spatial-service-overlap
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  region: eu-west-2
+  runtime: python3.7
+  lambdaHashingVersion: 20201221
+  
+functions:
+  find_max:
+    handler: src/handler.get_max_pizza_overlap    
+    layers:
+      - arn:aws:lambda:us-east-1:668099181075:layer:AWSLambda-Python37-SciPy1x:37
+    events:
+      - http:
+          path: /api/max_pizza_overlap
+          method: post
