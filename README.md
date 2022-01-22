@@ -122,7 +122,7 @@ so for example:
 ```
 curl -X POST \
      -H "Content-Type: application/json" \
-     -d  json inline \
+     -d '{"N": 5, "P": [[3, 3, 2], [3, 3, 3], [1, 1, 2]]}' \
      https://d4bhu5x3ag.execute-api.eu-west-2.amazonaws.com/dev/api/max_pizza_overlap
 
 curl -X POST \
